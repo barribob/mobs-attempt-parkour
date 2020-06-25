@@ -1,4 +1,4 @@
-package net.barribob.maelstrom.mob.server.ai
+package net.barribob.parkour.mob.server.ai
 
 enum class BlockType {
     OPEN,

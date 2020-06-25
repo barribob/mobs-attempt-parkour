@@ -1,4 +1,4 @@
-package net.barribob.maelstrom.general
+package net.barribob.parkour.general
 
 import java.util.*
 

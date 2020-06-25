@@ -1,10 +1,10 @@
-package net.barribob.maelstrom.mob.server.ai
+package net.barribob.parkour.mob.server.ai
 
 import com.sun.javafx.geom.Vec2d
-import net.barribob.maelstrom.MaelstromMod
-import net.barribob.maelstrom.adapters.IGoal
-import net.barribob.maelstrom.general.*
-import net.barribob.maelstrom.mob.MobUtils
+import net.barribob.parkour.MaelstromMod
+import net.barribob.parkour.adapters.IGoal
+import net.barribob.parkour.general.*
+import net.barribob.parkour.mob.MobUtils
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.mob.MobEntity
 import net.minecraft.util.hit.HitResult

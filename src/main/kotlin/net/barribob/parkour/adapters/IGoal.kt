@@ -1,4 +1,4 @@
-package net.barribob.maelstrom.adapters
+package net.barribob.parkour.adapters
 
 import java.util.*
 

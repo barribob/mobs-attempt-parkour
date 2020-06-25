@@ -1,4 +1,4 @@
-package net.barribob.maelstrom.general
+package net.barribob.parkour.general
 
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d

@@ -1,4 +1,4 @@
-package net.barribob.maelstrom.mob
+package net.barribob.parkour.mob
 
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.ai.goal.Goal

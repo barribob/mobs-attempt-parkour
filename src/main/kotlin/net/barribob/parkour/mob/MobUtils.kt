@@ -1,9 +1,9 @@
-package net.barribob.maelstrom.mob
+package net.barribob.parkour.mob
 
-import net.barribob.maelstrom.adapters.GoalConverter
-import net.barribob.maelstrom.adapters.IGoal
-import net.barribob.maelstrom.general.yOffset
-import net.barribob.maelstrom.mob.server.ai.BlockType
+import net.barribob.parkour.adapters.GoalConverter
+import net.barribob.parkour.adapters.IGoal
+import net.barribob.parkour.general.yOffset
+import net.barribob.parkour.mob.server.ai.BlockType
 import net.minecraft.block.*
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity

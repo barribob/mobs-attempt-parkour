@@ -1,7 +1,7 @@
-package net.barribob.maelstrom.mixin;
+package net.barribob.parkour.mixin;
 
 import kotlin.Pair;
-import net.barribob.maelstrom.MaelstromMod;
+import net.barribob.parkour.MaelstromMod;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.goal.GoalSelector;
 import net.minecraft.entity.mob.MobEntity;
