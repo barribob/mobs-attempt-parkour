@@ -1,6 +1,5 @@
 package net.barribob.parkour.mob.server.ai
 
-import com.sun.javafx.geom.Vec2d
 import net.barribob.parkour.MaelstromMod
 import net.barribob.parkour.adapters.IGoal
 import net.barribob.parkour.general.*
