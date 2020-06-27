@@ -1,6 +1,5 @@
 package net.barribob.parkour.mob.server.ai
 
-import com.sun.javafx.geom.Vec2d
 import net.barribob.parkour.MaelstromMod
 import net.barribob.parkour.adapters.IGoal
 import net.barribob.parkour.general.*
@@ -45,7 +44,7 @@ class JumpToTargetGoal(private val entity: MobEntity) : IGoal {
     private val jumpNoise = 0.1
     private var jumpData: JumpData? = null
 
-    data class JumpData(val jumpVel: Vec2d, val direction: Vec3d, val edgePos: Vec3d)
+    data class JumpData(val jumpVel: Pair<Double, Double>, val direction: Vec3d, val edgePos: Vec3d)
 
     override fun getControls(): EnumSet<IGoal.Control>? {
         return EnumSet.of(IGoal.Control.MOVE, IGoal.Control.JUMP)
@@ -112,8 +111,8 @@ class JumpToTargetGoal(private val entity: MobEntity) : IGoal {
             return
         }
 
-        MobUtils.leapTowards(entity, entity.pos.add(jumpData.direction), jumpData.jumpVel.x + jumpData.jumpVel.x * RandomUtils.double(jumpNoise), if(jumpData.jumpVel.y > 0) 0.0 else 0.1)
-        if(jumpData.jumpVel.y > 0) {
+        MobUtils.leapTowards(entity, entity.pos.add(jumpData.direction), jumpData.jumpVel.first + jumpData.jumpVel.first * RandomUtils.double(jumpNoise), if(jumpData.jumpVel.second > 0) 0.0 else 0.1)
+        if(jumpData.jumpVel.second > 0) {
             entity.jumpControl.setActive()
         }
         for (i in 0..forwardMovementTicks) {
@@ -144,7 +143,7 @@ class JumpToTargetGoal(private val entity: MobEntity) : IGoal {
         return (0..steps).flatMap { d -> (0..(steps - d)).map { y -> Pair(d, y) } }.sortedBy { pair -> pair.first + pair.second }
     }
 
-    private fun getJumpLength(actorPos: Vec3d, targetDirection: Vec3d): Pair<Vec3d, Vec2d>? {
+    private fun getJumpLength(actorPos: Vec3d, targetDirection: Vec3d): Pair<Vec3d, Pair<Double, Double>>? {
 
         val (maxYVel, maxJumpHeight, maxHorzVel) = getMobJumpAbilities()
         val jumpOffsets = getJumpOffsets(maxHorzVel)
@@ -173,7 +172,7 @@ class JumpToTargetGoal(private val entity: MobEntity) : IGoal {
                 val xVelWithJump = calculateRequiredXVelocity(jumpLength, jumpHeight, jumpEffort)
 
                 if(xVelWithJump < maxHorzVel) {
-                    return Pair(recalculatedDirection, Vec2d(xVelWithJump, jumpEffort))
+                    return Pair(recalculatedDirection, Pair(xVelWithJump, jumpEffort))
                 }
             }
             return null
