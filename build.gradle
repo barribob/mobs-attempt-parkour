@@ -17,6 +17,7 @@ minecraft {
 
 repositories {
     maven { url = "http://maven.fabricmc.net/" }
+//    mavenLocal()
 }
 
 dependencies {
@@ -33,6 +34,7 @@ dependencies {
     // PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
     // You may need to force-disable transitiveness on them.
     modImplementation "net.barribob:maelstrom-mod-invasions:${project.maelstrom_version}"
+    include "net.barribob:maelstrom-mod-invasions:${project.maelstrom_version}"
 }
 
 processResources {
@@ -67,9 +69,7 @@ jar {
     from "LICENSE"
 }
 
-// configure the maven publication
 publishing.repositories {
-    // uncomment to publish to the local maven
     // mavenLocal()
 }
 
