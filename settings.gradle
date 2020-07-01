@@ -14,3 +14,5 @@ pluginManagement {
     }
 
 }
+
+includeBuild("../maelstrom-mod-invasions")

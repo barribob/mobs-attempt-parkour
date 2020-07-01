@@ -1,7 +1,7 @@
 package net.barribob.parkour
 
+import net.barribob.maelstrom.general.EventScheduler
 import net.barribob.parkour.adapters.GoalAdapter
-import net.barribob.parkour.general.EventScheduler
 import net.barribob.parkour.mob.AIManager
 import net.barribob.parkour.mob.server.ai.JumpToTargetGoal
 import net.fabricmc.api.EnvType
