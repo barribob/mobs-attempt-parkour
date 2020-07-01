@@ -20,12 +20,9 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.barribob.parkour.MaelstromModKt::init"
+      "net.barribob.parkour.MainKt::init"
     ]
   },
-  "mixins": [
-    "parkour.mixins.json"
-  ],
   "depends": {
     "fabricloader": ">=0.7.1",
     "fabric": "*",

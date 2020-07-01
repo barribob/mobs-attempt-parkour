@@ -1,32 +1,12 @@
 package net.barribob.parkour
 
-import net.barribob.maelstrom.general.EventScheduler
-import net.barribob.parkour.adapters.GoalAdapter
-import net.barribob.parkour.mob.AIManager
-import net.barribob.parkour.mob.server.ai.JumpToTargetGoal
-import net.fabricmc.api.EnvType
-import net.fabricmc.api.Environment
-import net.fabricmc.fabric.api.event.server.ServerTickCallback
+import net.barribob.maelstrom.MaelstromMod
+import net.barribob.maelstrom.adapters.GoalAdapter
+import net.barribob.maelstrom.mob.server.ai.JumpToTargetGoal
 import net.minecraft.entity.EntityType
-import org.apache.logging.log4j.LogManager
-import org.apache.logging.log4j.Logger
-
-object MaelstromMod {
-    const val MODID = "mobs_attempt_parkour"
-
-    @Environment(EnvType.SERVER)
-    val serverEventScheduler = EventScheduler()
-
-    @Environment(EnvType.SERVER)
-    val aiManager = AIManager()
-
-    val LOGGER: Logger = LogManager.getLogger()
-}
 
 @Suppress("unused")
 fun init() {
-    ServerTickCallback.EVENT.register(ServerTickCallback { MaelstromMod.serverEventScheduler.updateEvents() })
-
     MaelstromMod.aiManager.addGoalInjection(EntityType.ZOMBIE) { entity -> Pair(1, GoalAdapter(JumpToTargetGoal(entity))) }
     MaelstromMod.aiManager.addGoalInjection(EntityType.ZOMBIE_VILLAGER) { entity -> Pair(1, GoalAdapter(JumpToTargetGoal(entity))) }
     MaelstromMod.aiManager.addGoalInjection(EntityType.ZOMBIFIED_PIGLIN) { entity -> Pair(1, GoalAdapter(JumpToTargetGoal(entity))) }
