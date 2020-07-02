@@ -15,4 +15,4 @@ pluginManagement {
 
 }
 
-includeBuild("../maelstrom-mod-invasions")
+includeBuild("../maelstrom-library")
