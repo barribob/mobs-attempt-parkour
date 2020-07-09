@@ -5,10 +5,9 @@ import net.barribob.maelstrom.MaelstromMod
 import net.barribob.maelstrom.adapters.GoalAdapter
 import net.barribob.maelstrom.config.Config
 import net.barribob.maelstrom.mob.server.ai.JumpToTargetGoal
+import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback
 import net.minecraft.entity.EntityType
-import net.minecraft.entity.mob.MobEntity
-import org.apache.logging.log4j.LogManager
-import org.apache.logging.log4j.Logger
+import net.minecraft.util.registry.Registry
 
 /**
  * Issues: Massive lag spike first time parkour activates
@@ -19,7 +18,6 @@ data class AiInfo(val priority: Int = 0, val mobId: String)
 object Parkour {
     const val MODID = "mobs_attempt_parkour"
     const val VERSION = "0.2"
-    val LOGGER: Logger = LogManager.getLogger()
 }
 
 @Suppress("unused")
@@ -48,18 +46,8 @@ fun init() {
     val configData = MaelstromMod.configManager.handleConfigLoad(config, configType, Parkour.MODID)
 
     configData.forEach {
-        val entityType = EntityType.get(it.mobId)
-        if (entityType.isPresent) {
-            try {
-                val mobType = entityType.get() as EntityType<out MobEntity>
-                MaelstromMod.aiManager.addGoalInjection(mobType) { entity -> Pair(it.priority, GoalAdapter(JumpToTargetGoal(entity))) }
-            } catch (e: Exception) {
-                Parkour.LOGGER.warn("Failed to add jumping ai to ${it.mobId}")
-                e.printStackTrace()
-            }
-        }
-        else {
-            Parkour.LOGGER.warn("Could not find ${it.mobId} to apply jumping ai to")
+        MaelstromMod.aiManager.addGoalInjection(it.mobId) { entity ->
+            Pair(it.priority, GoalAdapter(JumpToTargetGoal(entity)))
         }
     }
 }
