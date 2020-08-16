@@ -2,12 +2,9 @@ package net.barribob.parkour
 
 import com.google.gson.reflect.TypeToken
 import net.barribob.maelstrom.MaelstromMod
-import net.barribob.maelstrom.adapters.GoalAdapter
 import net.barribob.maelstrom.config.Config
 import net.barribob.maelstrom.mob.server.ai.JumpToTargetGoal
-import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback
 import net.minecraft.entity.EntityType
-import net.minecraft.util.registry.Registry
 
 /**
  * Issues: Massive lag spike first time parkour activates
@@ -17,7 +14,7 @@ data class AiInfo(val priority: Int = 0, val mobId: String)
 
 object Parkour {
     const val MODID = "mobs_attempt_parkour"
-    const val VERSION = "0.2"
+    const val VERSION = "0.2.1"
 }
 
 @Suppress("unused")
@@ -47,7 +44,7 @@ fun init() {
 
     configData.forEach {
         MaelstromMod.aiManager.addGoalInjection(it.mobId) { entity ->
-            Pair(it.priority, GoalAdapter(JumpToTargetGoal(entity)))
+            Pair(it.priority, JumpToTargetGoal(entity))
         }
     }
 }
