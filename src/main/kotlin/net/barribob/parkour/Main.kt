@@ -2,8 +2,8 @@ package net.barribob.parkour
 
 import com.google.gson.reflect.TypeToken
 import net.barribob.maelstrom.MaelstromMod
-import net.barribob.maelstrom.config.Config
-import net.barribob.maelstrom.mob.server.ai.JumpToTargetGoal
+import net.barribob.maelstrom.general.Config
+import net.barribob.maelstrom.mob.ai.JumpToTargetGoal
 import net.minecraft.entity.EntityType
 
 /**
