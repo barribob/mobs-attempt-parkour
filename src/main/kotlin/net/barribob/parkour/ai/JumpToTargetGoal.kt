@@ -2,7 +2,6 @@ package net.barribob.parkour.ai
 
 import net.barribob.maelstrom.MaelstromMod
 import net.barribob.maelstrom.general.event.TimedEvent
-import net.barribob.maelstrom.mob.ai.BlockType
 import net.barribob.maelstrom.static_utilities.*
 import net.barribob.parkour.ModUtils
 import net.minecraft.entity.ai.goal.Goal

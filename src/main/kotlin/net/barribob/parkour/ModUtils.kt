@@ -1,6 +1,6 @@
 package net.barribob.parkour
 
-import net.barribob.maelstrom.mob.ai.BlockType
+import net.barribob.parkour.ai.BlockType
 import net.barribob.maelstrom.static_utilities.yOffset
 import net.minecraft.block.*
 import net.minecraft.entity.LivingEntity
