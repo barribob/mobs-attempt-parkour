@@ -17,9 +17,7 @@ minecraft {
 
 repositories {
     maven { url = "http://maven.fabricmc.net/" }
-    if(project.doBuild) {
-        mavenLocal()
-    }
+    mavenLocal()
 }
 
 dependencies {
@@ -36,7 +34,12 @@ dependencies {
     // PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
     // You may need to force-disable transitiveness on them.
 
-    modImplementation "net.barribob:maelstrom-library:${project.maelstrom_version}-${project.minecraft_version}"
+    if(project.doBuild.toBoolean()) {
+        modImplementation "net.barribob:maelstrom-library:${project.maelstrom_version}-${project.minecraft_version}"
+    } else {
+        implementation "net.barribob:maelstrom-library:${project.maelstrom_version}-${project.minecraft_version}"
+    }
+
     include "net.barribob:maelstrom-library:${project.maelstrom_version}-${project.minecraft_version}"
 }
 
