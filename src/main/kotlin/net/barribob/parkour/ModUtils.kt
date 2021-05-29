@@ -66,8 +66,8 @@ object ModUtils {
                     blockState.isOf(Blocks.HONEY_BLOCK) ||
                     blockState.isOf(Blocks.MAGMA_BLOCK) -> BlockType.SOLID_OBSTACLE
             block is LeavesBlock ||
-                    block.isIn(BlockTags.FENCES) ||
-                    block.isIn(BlockTags.WALLS) ||
+                    blockState.isIn(BlockTags.FENCES) ||
+                    blockState.isIn(BlockTags.WALLS) ||
                     (block is FenceGateBlock && !blockState.get(FenceGateBlock.OPEN)) ||
                     (DoorBlock.isWoodenDoor(blockState) && !blockState.get(DoorBlock.OPEN)) ||
                     (block is DoorBlock && material == Material.METAL && !blockState.get(DoorBlock.OPEN)) ||
