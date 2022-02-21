@@ -14,9 +14,10 @@ group = project.maven_group
 minecraft {
 }
 
-
-repositories {
-    mavenLocal()
+allprojects {
+    repositories {
+        maven { url 'https://jitpack.io' }
+    }
 }
 
 dependencies {
@@ -33,9 +34,9 @@ dependencies {
     // PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
     // You may need to force-disable transitiveness on them.
 
-    modImplementation "net.barribob:maelstrom-library:${project.maelstrom_version}-${project.minecraft_maelstrom_version}"
+    modImplementation "com.github.miyo6032:maelstrom-lib:${project.commit_hash}"
 
-    include "net.barribob:maelstrom-library:${project.maelstrom_version}-${project.minecraft_maelstrom_version}"
+    include "com.github.miyo6032:maelstrom-lib:${project.commit_hash}"
 }
 
 processResources {

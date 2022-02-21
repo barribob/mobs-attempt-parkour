@@ -15,6 +15,3 @@ pluginManagement {
 
 }
 
-if(!doBuild.toBoolean()) {
-    includeBuild("../maelstrom-library")
-}
