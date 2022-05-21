@@ -1,9 +1,9 @@
 package net.barribob.parkour.ai
 
-import net.barribob.maelstrom.MaelstromMod
 import net.barribob.maelstrom.general.event.TimedEvent
 import net.barribob.maelstrom.static_utilities.*
 import net.barribob.parkour.ModUtils
+import net.barribob.parkour.Parkour
 import net.minecraft.entity.ai.goal.Goal
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.mob.MobEntity
@@ -142,7 +142,7 @@ class JumpToTargetGoal(private val entity: MobEntity) : Goal() {
             if(!entity.isOnGround) entity.moveControl.moveTo(movePos.x, movePos.y, movePos.z, jumpForwardSpeed)
         }
         val shouldCancel = { !entity.isAlive || entity.isOnGround }
-        MaelstromMod.serverEventScheduler.addEvent(TimedEvent(callback, 0, forwardMovementTicks, shouldCancel))
+        Parkour.serverEventScheduler.addEvent(TimedEvent(callback, 0, forwardMovementTicks, shouldCancel))
         entity.navigation.stop()
         this.jumpData = null
     }

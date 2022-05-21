@@ -1,12 +1,15 @@
 package net.barribob.parkour
 
 import com.google.gson.reflect.TypeToken
-import net.barribob.maelstrom.MaelstromMod
+import net.barribob.maelstrom.general.event.EventScheduler
+import net.barribob.parkour.Parkour.serverEventScheduler
+import net.barribob.parkour.ai.AIInjector
+import net.barribob.parkour.ai.JumpToTargetGoal
 import net.barribob.parkour.config.Config
 import net.barribob.parkour.config.ConfigManager
-import net.barribob.parkour.ai.JumpToTargetGoal
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents
 import net.minecraft.entity.EntityType
 
 data class AiInfo(val priority: Int = 0, val mobId: String)
@@ -14,6 +17,11 @@ data class AiInfo(val priority: Int = 0, val mobId: String)
 object Parkour {
     const val MODID = "mobs_attempt_parkour"
     const val VERSION = "0.2.1"
+
+    @Environment(EnvType.SERVER)
+    val aiInjector = AIInjector()
+
+    val serverEventScheduler = EventScheduler()
 
     @Environment(EnvType.SERVER)
     val configManager = ConfigManager()
@@ -45,8 +53,10 @@ fun init() {
     val configData = Parkour.configManager.handleConfigLoad(config, configType, Parkour.MODID)
 
     configData.forEach {
-        MaelstromMod.aiManager.addGoalInjection(it.mobId) { entity ->
+        Parkour.aiInjector.addGoalInjection(it.mobId) { entity ->
             Pair(it.priority, JumpToTargetGoal(entity))
         }
     }
+
+    ServerTickEvents.START_SERVER_TICK.register(ServerTickEvents.StartTick { serverEventScheduler.updateEvents() })
 }

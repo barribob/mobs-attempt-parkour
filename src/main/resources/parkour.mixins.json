@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "net.barribob.parkour.mixin",
+  "compatibilityLevel": "JAVA_16",
+  "mixins": [
+    "AIManipulationMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
