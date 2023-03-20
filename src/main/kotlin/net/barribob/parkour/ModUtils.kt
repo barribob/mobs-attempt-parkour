@@ -6,10 +6,11 @@ import net.minecraft.block.*
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.entity.effect.StatusEffects
-import net.minecraft.tag.BlockTags
-import net.minecraft.tag.FluidTags
+import net.minecraft.registry.tag.BlockTags
+import net.minecraft.registry.tag.FluidTags
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Box
+import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.Vec3d
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.world.BlockView
@@ -31,9 +32,17 @@ object ModUtils {
     }
 
     private fun getVelocityAffectingPos(entity: LivingEntity): BlockPos {
-        return BlockPos(entity.pos.x, entity.boundingBox.minY - 0.5000001, entity.pos.z)
+        return floorBlockPos(entity.pos.x, entity.boundingBox.minY - 0.5000001, entity.pos.z)
+    }
+    
+    private fun floorBlockPos(x: Double, y: Double, z: Double) : BlockPos {
+        return BlockPos(MathHelper.floor(x), MathHelper.floor(y), MathHelper.floor(z))
     }
 
+    fun floorBlockPos(pos: Vec3d) : BlockPos {
+        return floorBlockPos(pos.x, pos.y, pos.z)
+    }
+    
     fun leapTowards(entity: LivingEntity, target: Vec3d, horzVel: Double, yVel: Double) {
         val dir = target.subtract(entity.pos).normalize()
         val leap: Vec3d = Vec3d(dir.x, 0.0, dir.z).normalize().multiply(horzVel).yOffset(yVel)

@@ -57,7 +57,7 @@ class JumpToTargetGoal(private val entity: MobEntity) : Goal() {
             val path = entity.navigation.currentPath ?: return false
 
             val pathRange = path.currentNodeIndex until path.length
-            val hasNoObstacles = pathRange.map { getNode(BlockPos(path.getNode(it).pos)) }.none { it == BlockType.PASSABLE_OBSTACLE || it == BlockType.SOLID_OBSTACLE }
+            val hasNoObstacles = pathRange.map { getNode(ModUtils.floorBlockPos(path.getNode(it).pos)) }.none { it == BlockType.PASSABLE_OBSTACLE || it == BlockType.SOLID_OBSTACLE }
 
             if(entity.navigation.isFollowingPath && path.reachesTarget() && hasNoObstacles) {
                 return false
@@ -91,7 +91,7 @@ class JumpToTargetGoal(private val entity: MobEntity) : Goal() {
                 continue
             }
 
-            MathUtils.lineCallback(entity.pos, endPos, detectionPoints) { pos, _ -> gaps.add(Pair(pos, getNode(BlockPos(pos)))) }
+            MathUtils.lineCallback(entity.pos, endPos, detectionPoints) { pos, _ -> gaps.add(Pair(pos, getNode(ModUtils.floorBlockPos(pos)))) }
 
             val pairs = gaps.zipWithNext().firstOrNull { it.first.second == BlockType.WALKABLE && it.second.second == BlockType.PASSABLE_OBSTACLE }
             val hasGapsInARow = gaps.zipWithNext().firstOrNull { it.first.second == BlockType.WALKABLE && it.second.second == BlockType.WALKABLE }
@@ -119,7 +119,7 @@ class JumpToTargetGoal(private val entity: MobEntity) : Goal() {
             return
         }
 
-        if(BlockPos(this.entity.pos) != BlockPos(jumpData.edgePos)) {
+        if(ModUtils.floorBlockPos(this.entity.pos) != ModUtils.floorBlockPos(jumpData.edgePos)) {
             entity.moveControl.moveTo(jumpData.edgePos.x, jumpData.edgePos.y, jumpData.edgePos.z, moveSpeed)
             return
         }
@@ -171,7 +171,7 @@ class JumpToTargetGoal(private val entity: MobEntity) : Goal() {
         for ((x, y) in jumpOffsets) {
             val scaledStepX = 1.0 + x
             val jumpToPos = actorPos.add(targetDirection.multiply(scaledStepX))
-            val blockPos = BlockPos(jumpToPos)
+            val blockPos = ModUtils.floorBlockPos(jumpToPos)
             val groundHeight = findGroundAt(blockPos, y, maxJumpHeight) ?: continue
 
             val walkablePos = BlockPos(blockPos.x, groundHeight, blockPos.z)
