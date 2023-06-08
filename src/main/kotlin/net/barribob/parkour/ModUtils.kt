@@ -61,7 +61,6 @@ object ModUtils {
     fun getBlockType(world: BlockView, pos: BlockPos, callsLeft: Int): BlockType {
         val blockState = world.getBlockState(pos)
         val block = blockState.block
-        val material = blockState.material
         val fluidState = world.getFluidState(pos)
         val belowType = if(pos.y > 0 && callsLeft > 0) getBlockType(world, pos.down(), callsLeft - 1) else BlockType.OPEN
 
@@ -78,8 +77,7 @@ object ModUtils {
                     blockState.isIn(BlockTags.FENCES) ||
                     blockState.isIn(BlockTags.WALLS) ||
                     (block is FenceGateBlock && !blockState.get(FenceGateBlock.OPEN)) ||
-                    (DoorBlock.isWoodenDoor(blockState) && !blockState.get(DoorBlock.OPEN)) ||
-                    (block is DoorBlock && material == Material.METAL && !blockState.get(DoorBlock.OPEN)) ||
+                    (block is DoorBlock && !blockState.get(DoorBlock.OPEN)) ||
                     (block is DoorBlock && blockState.get(DoorBlock.OPEN)) ||
                     !blockState.canPathfindThrough(world, pos, NavigationType.LAND) -> BlockType.BLOCKED
             belowType == BlockType.BLOCKED -> BlockType.WALKABLE

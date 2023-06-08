@@ -24,7 +24,7 @@ public class AIManipulationMixin {
     @Inject(at = @At(value = "RETURN"), method = "<init>")
     private void goal(CallbackInfo info) {
         MobEntity entity = (MobEntity) (Object) this;
-        if (entity.world != null && !entity.world.isClient) {
+        if (entity.getEntityWorld() != null && !entity.getEntityWorld().isClient) {
             String mobId = EntityType.getId(entity.getType()).toString();
             AIInjector AIInjector = Parkour.INSTANCE.getAiInjector();
 
