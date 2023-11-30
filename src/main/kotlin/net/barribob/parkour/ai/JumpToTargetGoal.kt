@@ -185,7 +185,7 @@ class JumpToTargetGoal(private val entity: MobEntity) : Goal() {
 
             if (!hasClearance(actorPos, jumpLength, targetDirection)) return null
 
-            val blockHeight = if(!blockShape.isEmpty) blockShape.boundingBox.yLength else 0.0
+            val blockHeight = if(!blockShape.isEmpty) blockShape.boundingBox.lengthY else 0.0
             val jumpHeight = groundHeight + blockHeight - actorPos.y
 
             for(jumpEffort in listOf(0.0, maxYVel)) {

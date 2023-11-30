@@ -94,8 +94,8 @@ object ModUtils {
     }
 
     private fun getTopCornersAndEdges(box: Box): List<Vec3d> {
-        val halfX = box.xLength * 0.5
-        val halfZ = box.zLength * 0.5
+        val halfX = box.lengthX * 0.5
+        val halfZ = box.lengthZ * 0.5
 
         return listOf(
             Vec3d(box.minX, box.maxY, box.minZ),
