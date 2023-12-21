@@ -18,12 +18,10 @@ object Parkour {
     const val MODID = "mobs_attempt_parkour"
     const val VERSION = "0.2.1"
 
-    @Environment(EnvType.SERVER)
     val aiInjector = AIInjector()
 
     val serverEventScheduler = EventScheduler()
 
-    @Environment(EnvType.SERVER)
     val configManager = ConfigManager()
 }
 
